@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marco Cruz - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --bg2: #16162a;
+      --card: #1e1e35;
+      --border: #2a2a50;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #e0e0f0;
+      --text-muted: #9090b0;
+      --nav-height: 64px;
+    }
+    [data-theme="light"] {
+      --bg: #f4f4fc;
+      --bg2: #ffffff;
+      --card: #ffffff;
+      --border: #dcdcf0;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #1a1a2e;
+      --text-muted: #6060a0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 1000;
+    }
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 4px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 0 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── HOME ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-top: calc(var(--nav-height) + 40px);
+    }
+    .home-text h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .home-text h2 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .typewriter {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      min-height: 1.5em;
+    }
+    .btn-cv {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-cv:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+    }
+    .home-img {
+      flex-shrink: 0;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 40px rgba(108,99,255,0.3);
+    }
+    .home-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── PORTFOLIO ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .project-card img.preview {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .project-body { padding: 1.2rem; }
+    .project-body h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .project-body p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .project-tools {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .project-tools img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+    .project-links { display: flex; gap: 10px; }
+    .proj-link {
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: opacity 0.2s;
+    }
+    .proj-link:hover { opacity: 0.8; }
+    .proj-link.code {
+      background: var(--border);
+      color: var(--text);
+    }
+    .proj-link.demo {
+      background: var(--accent);
+      color: #fff;
+    }
+    .see-more {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .see-more a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .see-more a:hover { text-decoration: underline; }
+
+    /* ── SKILLS ── */
+    .skills-group { margin-bottom: 2.5rem; }
+    .skills-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 72px;
+    }
+    .skill-item img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      transition: transform 0.2s;
+    }
+    .skill-item:hover img { transform: translateY(-4px); }
+    .skill-item span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── ABOUT ── */
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .about-text { flex: 1; }
+    .about-text p {
+      color: var(--text-muted);
+      line-height: 1.9;
+      font-size: 0.95rem;
+    }
+    .about-text p strong { color: var(--text); }
+    .about-img {
+      flex-shrink: 0;
+      width: 260px;
+    }
+    .about-img img { width: 100%; border-radius: 12px; }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center;
+    }
+    #contact p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-email {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--accent);
+      padding: 12px 32px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-email:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      #home { flex-direction: column-reverse; text-align: center; }
+      .home-img { width: 180px; height: 180px; }
+      .about-content { flex-direction: column; }
+      .about-img { width: 100%; max-width: 300px; }
+      .nav-links { display: none; }
+    }
+
+    /* fade-in on scroll */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">M.</a>
+  <ul class="nav-links">
+    <li><a href="#home">Inicio</a></li>
+    <li><a href="#portfolio">Proyectos</a></li>
+    <li><a href="#skills">Habilidades</a></li>
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn">English</button>
+    <button class="theme-toggle" id="themeBtn" title="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="home-text fade-in">
+    <h1>¡Hola! ✌️</h1>
+    <h2>Soy Marco Cruz</h2>
+    <p class="typewriter" id="typewriter"></p>
+    <a href="https://marco-cruz.netlify.app/pdf/cv.pdf" class="btn-cv" target="_blank">⬇ Descargar CV</a>
+  </div>
+  <div class="home-img fade-in">
+    <img src="https://marco-cruz.netlify.app/me.webp" alt="Marco Cruz - Desarrollador Frontend" />
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2 class="section-title">Proyectos</h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <a href="https://cloudbox-m.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/cloud-box.webp" alt="Cloud Box" />
+      </a>
+      <div class="project-body">
+        <h3>Cloud Box</h3>
+        <p>Servicio de almacenamiento en la nube que permite a los usuarios cargar y descargar archivos. También puedes crear carpetas y subcarpetas para organizar tus archivos.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular" title="Angular">
+          <img src="https://marco-cruz.netlify.app/images/nodejs.webp" alt="NodeJs" title="NodeJs">
+          <img src="https://marco-cruz.netlify.app/images/mongo.webp" alt="MongoDB" title="MongoDB">
+          <img src="https://marco-cruz.netlify.app/images/docker.webp" alt="Docker" title="Docker">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/cloudbox-frontend" class="proj-link code" target="_blank">Código</a>
+          <a href="https://cloudbox-m.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://inforeader.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/inforeader.webp" alt="Info Reader" />
+      </a>
+      <div class="project-body">
+        <h3>Info Reader</h3>
+        <p>Aplicación web para leer noticias de tecnología usando fuentes RSS de diferentes fuentes almacenadas en base de datos. Permite crear cuenta de usuario y guardar noticias favoritas.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular">
+          <img src="https://marco-cruz.netlify.app/images/nodejs.webp" alt="NodeJs">
+          <img src="https://marco-cruz.netlify.app/images/mongo.webp" alt="MongoDB">
+          <img src="https://marco-cruz.netlify.app/images/docker.webp" alt="Docker">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/InfoReader-App" class="proj-link code" target="_blank">Código</a>
+          <a href="https://inforeader.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://smart-dental.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/smart-dental.webp" alt="Smart Dental" />
+      </a>
+      <div class="project-body">
+        <h3>Smart Dental</h3>
+        <p>Aplicación para gestionar una clínica dental: historial de pacientes, citas, inventario, empleados y pacientes.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular">
+          <img src="https://marco-cruz.netlify.app/images/nestjs.webp" alt="NestJs">
+          <img src="https://marco-cruz.netlify.app/images/mysql.webp" alt="MySQL">
+          <img src="https://marco-cruz.netlify.app/images/docker.webp" alt="Docker">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/smart-dental-frontend" class="proj-link code" target="_blank">Código</a>
+          <a href="https://smart-dental.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://bon-appetito.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/bon-appetito.webp" alt="Bon Appetito" />
+      </a>
+      <div class="project-body">
+        <h3>Bon Appetito App</h3>
+        <p>Compra o construye tu propia pizza, selecciona los ingredientes y el tamaño, y realiza tu pedido.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular">
+          <img src="https://marco-cruz.netlify.app/images/ts.webp" alt="TypeScript">
+          <img src="https://marco-cruz.netlify.app/images/sass.webp" alt="SASS">
+          <img src="https://marco-cruz.netlify.app/images/html.webp" alt="HTML">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/bon-appetito" class="proj-link code" target="_blank">Código</a>
+          <a href="https://bon-appetito.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://wordguess-game.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/guess-word.webp" alt="Guess Word Game" />
+      </a>
+      <div class="project-body">
+        <h3>Guess Word Game</h3>
+        <p>Juego en el que debes adivinar la respuesta a una pregunta. Según el nivel de dificultad tendrás un número de intentos determinados.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular">
+          <img src="https://marco-cruz.netlify.app/images/nodejs.webp" alt="NodeJs">
+          <img src="https://marco-cruz.netlify.app/images/sass.webp" alt="SASS">
+          <img src="https://marco-cruz.netlify.app/images/mongo.webp" alt="MongoDB">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/GuessWord-Game" class="proj-link code" target="_blank">Código</a>
+          <a href="https://wordguess-game.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://twitter-clone-challenge.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/twitter-clone.webp" alt="Twitter Clone" />
+      </a>
+      <div class="project-body">
+        <h3>Twitter Clone</h3>
+        <p>Clon de Twitter con cuenta de usuario, publicación de tweets, seguimiento de usuarios, me gusta y más funciones.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular">
+          <img src="https://marco-cruz.netlify.app/images/nodejs.webp" alt="NodeJs">
+          <img src="https://marco-cruz.netlify.app/images/sass.webp" alt="SASS">
+          <img src="https://marco-cruz.netlify.app/images/mongo.webp" alt="MongoDB">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/twitter-clone" class="proj-link code" target="_blank">Código</a>
+          <a href="https://twitter-clone-challenge.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://marcode24.github.io/memory-game/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/memory-game.webp" alt="Memory Game" />
+      </a>
+      <div class="project-body">
+        <h3>Memory Game</h3>
+        <p>Juego de memoria para encontrar los pares de cartas. Hay 3 niveles de dificultad: fácil, medio y difícil.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/html.webp" alt="HTML">
+          <img src="https://marco-cruz.netlify.app/images/css.webp" alt="CSS">
+          <img src="https://marco-cruz.netlify.app/images/js.webp" alt="JavaScript">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/memory-game" class="proj-link code" target="_blank">Código</a>
+          <a href="https://marcode24.github.io/memory-game/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <a href="https://unit-converter-site.netlify.app/" target="_blank">
+        <img class="preview" src="https://marco-cruz.netlify.app/images/portfolio/unit-converter.webp" alt="Unit Converter" />
+      </a>
+      <div class="project-body">
+        <h3>Unit Converter</h3>
+        <p>Conversor de unidades: longitud, peso, volumen y más categorías.</p>
+        <div class="project-tools">
+          <img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular">
+          <img src="https://marco-cruz.netlify.app/images/ts.webp" alt="TypeScript">
+          <img src="https://marco-cruz.netlify.app/images/sass.webp" alt="SASS">
+          <img src="https://marco-cruz.netlify.app/images/html.webp" alt="HTML">
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/marcode24/Unit-Converter" class="proj-link code" target="_blank">Código</a>
+          <a href="https://unit-converter-site.netlify.app/" class="proj-link demo" target="_blank">Demo</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="see-more">
+    <a href="https://github.com/marcode24?tab=overview" target="_blank">Ver más...</a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-title">Habilidades</h2>
+
+  <div class="skills-group fade-in">
+    <h3>Frontend</h3>
+    <div class="skills-list">
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/html.webp" alt="HTML"><span>HTML</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/css.webp" alt="CSS"><span>CSS 3</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/js.webp" alt="JavaScript"><span>JavaScript</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/ts.webp" alt="TypeScript"><span>TypeScript</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/angular.webp" alt="Angular"><span>Angular</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/astro.webp" alt="Astro"><span>Astro</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/svelte.webp" alt="Svelte"><span>Svelte</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/sass.webp" alt="SASS"><span>SASS</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/bootstrap.webp" alt="Bootstrap"><span>Bootstrap</span></div>
+    </div>
+  </div>
+
+  <div class="skills-group fade-in">
+    <h3>Backend</h3>
+    <div class="skills-list">
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/nodejs.webp" alt="Nodejs"><span>Nodejs</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/nestjs.webp" alt="Nestjs"><span>Nestjs</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/mongo.webp" alt="MongoDB"><span>MongoDB</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/postgresql.webp" alt="PostgreSQL"><span>PostgreSql</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/sqlserver.webp" alt="SQL Server"><span>Sql Server</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/mysql.webp" alt="MySQL"><span>MySql</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/docker.webp" alt="Docker"><span>Docker</span></div>
+    </div>
+  </div>
+
+  <div class="skills-group fade-in">
+    <h3>Otras herramientas</h3>
+    <div class="skills-list">
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/git.webp" alt="Git"><span>Git</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/azure.webp" alt="Azure"><span>Azure</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/figma.webp" alt="Figma"><span>Figma</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/postman.webp" alt="Postman"><span>Postman</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/jest.webp" alt="Jest"><span>Jest</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/jasmine.webp" alt="Jasmine"><span>Jasmine</span></div>
+    </div>
+  </div>
+
+  <div class="skills-group fade-in">
+    <h3>Aprendiendo</h3>
+    <div class="skills-list">
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/vue.webp" alt="Vue"><span>Vue</span></div>
+      <div class="skill-item"><img src="https://marco-cruz.netlify.app/images/tailwind.webp" alt="Tailwind"><span>Tailwind</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-title">Sobre mí</h2>
+  <div class="about-content fade-in">
+    <div class="about-text">
+      <p>
+        Me llamo Marco Antonio Cruz Gabino, pero puedes llamarme Marco. Mi camino en la programación comenzó a la temprana edad de 16 años. Inicié mi viaje utilizando <strong>PSeInt como mi primer pseudolenguaje</strong>, una experiencia que sentó las bases de mi fascinación por la resolución de problemas y la lógica de programación.
+        <br><br>
+        Un hito significativo en mi trayectoria es la concepción y desarrollo de un sistema destinado a la búsqueda de herramientas de desarrollo, diseño y más. Esta iniciativa fue resultado de mi participación en la <strong>Hackathon del 'Día de la Programación'</strong> realizada en 2022, donde obtuve el honor de alcanzar la <strong>tercera posición</strong>.
+        <br><br>
+        Actualmente, me encuentro en la <strong>búsqueda de una oportunidad laboral como desarrollador frontend</strong>, donde pueda aplicar mis conocimientos y habilidades para crear soluciones que ayuden a las personas a resolver sus problemas.
+      </p>
+    </div>
+    <div class="about-img">
+      <img src="https://marco-cruz.netlify.app/programming.webp" alt="Marco Cruz - Sobre mí" />
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title" style="justify-content:center;">Contáctame</h2>
+  <p>Actualmente estoy buscando nuevas oportunidades, ¡mi correo electrónico siempre está abierto!</p>
+  <a href="mailto:marco24cruz08@gmail.com" class="contact-email">marco24cruz08@gmail.com</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Diseñado y Construido con ❤️ por <a href="https://github.com/marcode24" target="_blank">Marco Cruz</a></p>
+</footer>
+
+<script>
+  // Theme toggle
+  const btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    btn.textContent = isDark ? '🌙' : '☀️';
+  });
+
+  // Typewriter effect
+  const phrases = ['Desarrollador Frontend', 'Desarrollador Web', 'Apasionado por el código'];
+  let pi = 0, ci = 0, deleting = false;
+  const tw = document.getElementById('typewriter');
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      tw.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      tw.textContent = phrase.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  type();
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
